@@ -34,10 +34,7 @@ namespace BackEndTorreTest.Repositories
         public async Task PutUser(User user)
         {
             user.Follower = _dbContext.Users.FirstOrDefault(e => e.FollowerId == null);
-            _dbContext.Add(user);
-            //var userAux = _dbContext.Users.FirstOrDefault(e => e.FollowerId == null)
-            //var userAux = _dbContext.Users.Include(u => u.Favorites).FirstOrDefault(e => e.FollowerId == null);
-            //userAux.Favorites.Add(user);
+            _dbContext.Add(user);           
             await _dbContext.SaveChangesAsync();
         }
 
