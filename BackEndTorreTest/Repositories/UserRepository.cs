@@ -1,6 +1,7 @@
 ﻿using BackEndTorreTest.Models;
 using BackEndTorreTest.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace BackEndTorreTest.Repositories
@@ -38,6 +39,17 @@ namespace BackEndTorreTest.Repositories
             //var userAux = _dbContext.Users.Include(u => u.Favorites).FirstOrDefault(e => e.FollowerId == null);
             //userAux.Favorites.Add(user);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public List<User> GetFavoriteUsers()
+        {
+            var mainUser = _dbContext.Users.Include(x => x.Favorites).FirstOrDefault(e => e.FollowerId == null);
+
+            if (mainUser?.Favorites == null)
+            {
+                return new List<User>();
+            }
+            return mainUser.Favorites.ToList();
         }
     }
 }

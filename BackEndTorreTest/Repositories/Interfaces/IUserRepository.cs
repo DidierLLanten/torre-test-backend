@@ -8,5 +8,6 @@ namespace BackEndTorreTest.Repositories.Interfaces
         User GetUserById(int id);
         Task PostUser(User User);
         Task PutUser(User user);
+        List<User> GetFavoriteUsers();
     }
 }

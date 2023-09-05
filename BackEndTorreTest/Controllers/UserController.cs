@@ -3,8 +3,7 @@ using BackEndTorreTest.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndTorreTest.Controllers
-{
-    // UserController.cs (Capa de Presentación)
+{    
     [ApiController]
     [Route("api/users")]
     public class UserController : ControllerBase
@@ -19,7 +18,7 @@ namespace BackEndTorreTest.Controllers
 
         [HttpPost("buscarPorNombre")]
         public async Task<IActionResult> GetAllUsers([FromBody] string? userSearch)
-        {             
+        {
             var users = await _userService.GetAllUsers(userSearch);
             return Ok(users);
         }
@@ -35,12 +34,18 @@ namespace BackEndTorreTest.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFavorites ([FromForm] User user)
+        public async Task<IActionResult> AddFavorites([FromBody] User user)
         {
             await _userService.AddFavorite(user);
             return NoContent();
         }
-        // Otras acciones de controlador...
+
+        [HttpGet]
+        public IActionResult GetFavoriteUsers()
+        {
+            var favoriteUsers = _userService.GetFavoriteUsers();
+            return Ok(favoriteUsers);
+        }
     }
 
 }

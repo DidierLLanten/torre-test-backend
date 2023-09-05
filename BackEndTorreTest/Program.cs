@@ -4,6 +4,7 @@ using BackEndTorreTest.Services;
 using BackEndTorreTest.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);   
 
@@ -30,7 +31,10 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
     });
 });
-
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 var app = builder.Build();
 

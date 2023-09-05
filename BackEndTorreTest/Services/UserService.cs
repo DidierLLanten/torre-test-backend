@@ -33,7 +33,7 @@ namespace BackEndTorreTest.Services
                     identityType = "person",
                     limit = 10,
                     meta = false,
-                    query = userSearch, // Utiliza directamente la variable userSearch aquí
+                    query = userSearch, 
                     torreGgId = "194304"
                 };
                 var jsonData = JsonConvert.SerializeObject(json);
@@ -85,6 +85,13 @@ namespace BackEndTorreTest.Services
             {
                 await _userRepository.PutUser(user);
             }
+        }
+
+        public List<User> GetFavoriteUsers()
+        {
+            List<User> usuarios = new();
+            usuarios = _userRepository.GetFavoriteUsers();
+            return usuarios;
         }
     }
 }

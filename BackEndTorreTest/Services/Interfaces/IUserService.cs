@@ -7,5 +7,6 @@ namespace BackEndTorreTest.Services.Interfaces
         Task<IEnumerable<User>> GetAllUsers(string userSearch);
         User GetUserById(int id);
         Task AddFavorite(User user);
+        List<User> GetFavoriteUsers();
     }
 }
