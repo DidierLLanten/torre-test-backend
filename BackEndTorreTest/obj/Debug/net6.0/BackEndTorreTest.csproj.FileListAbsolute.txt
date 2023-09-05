@@ -41,3 +41,4 @@ C:\Users\Didie\Desktop\v.1.1 TechnicalTest\BackEndTorreTest\BackEndTorreTest\obj
 C:\Users\Didie\Desktop\v.1.1 TechnicalTest\BackEndTorreTest\BackEndTorreTest\obj\Debug\net6.0\BackEndTorreTest.pdb
 C:\Users\Didie\Desktop\v.1.1 TechnicalTest\BackEndTorreTest\BackEndTorreTest\obj\Debug\net6.0\BackEndTorreTest.genruntimeconfig.cache
 C:\Users\Didie\Desktop\v.1.1 TechnicalTest\BackEndTorreTest\BackEndTorreTest\obj\Debug\net6.0\ref\BackEndTorreTest.dll
+C:\Users\Didie\Desktop\v.1.1 TechnicalTest\BackEndTorreTest\BackEndTorreTest\bin\Debug\net6.0\Newtonsoft.Json.dll

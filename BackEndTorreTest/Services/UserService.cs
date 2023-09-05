@@ -2,6 +2,7 @@
 using BackEndTorreTest.Repositories.Interfaces;
 using BackEndTorreTest.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Forms;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -17,14 +18,25 @@ namespace BackEndTorreTest.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<User>> GetAllUsers(string userSearch)
         {
             try
             {
                 var httpClient = new HttpClient();
                 var apiUrl = "https://torre.ai/api/entities/_searchStream";
 
-                var jsonData = "{\r\n    \"excludeContacts\": true,\r\n    \"excludedPeople\": [],\r\n    \"identityType\": \"person\",\r\n    \"limit\": 10,\r\n    \"meta\": false,\r\n    \"query\": \"ROBERTO\",\r\n    \"torreGgId\": \"194304\"\r\n}";
+                //var jsonData = "{\r\n    \"excludeContacts\": true,\r\n    \"excludedPeople\": [],\r\n    \"identityType\": \"person\",\r\n    \"limit\": 10,\r\n    \"meta\": false,\r\n    \"query\": \"{userSearch}\",\r\n    \"torreGgId\": \"194304\"\r\n}";
+                var json = new
+                {
+                    excludeContacts = true,
+                    excludedPeople = new List<object>(),
+                    identityType = "person",
+                    limit = 10,
+                    meta = false,
+                    query = userSearch, // Utiliza directamente la variable userSearch aquí
+                    torreGgId = "194304"
+                };
+                var jsonData = JsonConvert.SerializeObject(json);
 
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
@@ -39,7 +51,7 @@ namespace BackEndTorreTest.Services
 
                     foreach (var jsonObject in jsonObjects)
                     {
-                        User usuario = JsonSerializer.Deserialize<User>(jsonObject);
+                        User usuario = System.Text.Json.JsonSerializer.Deserialize<User>(jsonObject);
                         usuarios.Add(usuario);
                     }
                     return usuarios;

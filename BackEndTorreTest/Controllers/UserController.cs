@@ -16,10 +16,11 @@ namespace BackEndTorreTest.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var users = await _userService.GetAllUsers();
+
+        [HttpPost("buscarPorNombre")]
+        public async Task<IActionResult> GetAllUsers([FromBody] string? userSearch)
+        {             
+            var users = await _userService.GetAllUsers(userSearch);
             return Ok(users);
         }
 
